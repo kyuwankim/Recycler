@@ -4,8 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -32,11 +35,21 @@ RecyclerView listview ;
 
 class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
 
-
+    ArrayList<Data> datas;
+    Context context;
+    public CustomRecycler(ArrayList<Data> datas, Context context){
+        this.datas = datas;
+        this.context = context;
+    }
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+
+
+
+
+        return new Holder(view);
     }
 
     @Override
@@ -46,13 +59,23 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return datas.size();
     }
 
     class Holder extends RecyclerView.ViewHolder{
 
+        ImageView image;
+        TextView no;
+        TextView title;
+
+
         public Holder(View itemView) {
             super(itemView);
+
+            image = (ImageView) itemView.findViewById(R.id.image);
+            no = (TextView) itemView.findViewById(R.id.txtNo);
+            title = (TextView) itemView.findViewById(R.id.txtTitle);
+
         }
     }
 
