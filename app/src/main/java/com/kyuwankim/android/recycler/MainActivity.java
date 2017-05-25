@@ -42,6 +42,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         this.context = context;
     }
 
+    // List View 에서 convertView == null일때 처리
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
@@ -52,9 +53,15 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         return new Holder(view);
     }
 
+    // 각 데이터 셀이 나타날때 호출되는 함수
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-
+        // 1. 데이터를 꺼낸다
+        Data data = datas.get(position);
+        // 2. 데이터를 세팅
+        holder.setImage(data.resId);
+        holder.setNo(data.no);
+        holder.setTitle(data.title);
     }
 
     @Override
@@ -76,6 +83,16 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
             no = (TextView) itemView.findViewById(R.id.txtNo);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
 
+        }
+
+        public void setImage(int resId){
+            image.setImageResource(resId);
+        }
+        public void setNo(int no){
+            this.no.setText(no+"");
+        }
+        public void setTitle(String title){
+            this.title.setText(title);
         }
     }
 
