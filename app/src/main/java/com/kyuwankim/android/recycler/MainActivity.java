@@ -3,6 +3,7 @@ package com.kyuwankim.android.recycler;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +27,13 @@ RecyclerView listview ;
         ArrayList<Data> datas = Loader.getData(this);
 
         // 2. 아답터
+        CustomRecycler adapter = new CustomRecycler(datas, this);
 
         // 3. 연결
+        listview.setAdapter(adapter);
 
         // 4. 레이아웃 매니저
+        listview.setLayoutManager(new LinearLayoutManager(this));
     }
 }
 
@@ -46,6 +50,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null, false);
 
 
 
